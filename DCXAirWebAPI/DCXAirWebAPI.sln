@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCXAirWebAPI", "DCXAirWebAPI.csproj", "{6FE5A8F2-2E4B-41CC-99E9-09C419138577}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65} = {8C44D2C8-9EF1-4989-AA22-3EB451D57D65}
+		{9FBACD92-6A00-473D-933D-D16ED72E708C} = {9FBACD92-6A00-473D-933D-D16ED72E708C}
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418} = {D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C84FF257-3850-49D0-95DB-3033D0171DF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{63EF8B87-6569-426C-AA9C-EE5B883EADC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{9FBACD92-6A00-473D-933D-D16ED72E708C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{8A53FFF4-0405-4B09-B217-2F87F3676EEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E2A53D89-968C-4988-87AC-C0B53EF02C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FE5A8F2-2E4B-41CC-99E9-09C419138577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE5A8F2-2E4B-41CC-99E9-09C419138577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE5A8F2-2E4B-41CC-99E9-09C419138577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE5A8F2-2E4B-41CC-99E9-09C419138577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FBACD92-6A00-473D-933D-D16ED72E708C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBACD92-6A00-473D-933D-D16ED72E708C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBACD92-6A00-473D-933D-D16ED72E708C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FBACD92-6A00-473D-933D-D16ED72E708C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6FE5A8F2-2E4B-41CC-99E9-09C419138577} = {C84FF257-3850-49D0-95DB-3033D0171DF9}
+		{9FBACD92-6A00-473D-933D-D16ED72E708C} = {63EF8B87-6569-426C-AA9C-EE5B883EADC7}
+		{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418} = {8A53FFF4-0405-4B09-B217-2F87F3676EEB}
+		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65} = {E2A53D89-968C-4988-87AC-C0B53EF02C2C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7400687-3987-4D2F-84E2-72F76B3F5C07}
+	EndGlobalSection
+EndGlobal
