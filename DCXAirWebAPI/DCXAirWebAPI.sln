@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCXAirWebAPI", "DCXAirWebAPI.csproj", "{6FE5A8F2-2E4B-41CC-99E9-09C419138577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DCXAirWebAPI", "DCXAirWebAPI.csproj", "{6FE5A8F2-2E4B-41CC-99E9-09C419138577}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8C44D2C8-9EF1-4989-AA22-3EB451D57D65} = {8C44D2C8-9EF1-4989-AA22-3EB451D57D65}
 		{9FBACD92-6A00-473D-933D-D16ED72E708C} = {9FBACD92-6A00-473D-933D-D16ED72E708C}
@@ -14,15 +14,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{63EF8B87-6569-426C-AA9C-EE5B883EADC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{9FBACD92-6A00-473D-933D-D16ED72E708C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\Domain\Domain.csproj", "{9FBACD92-6A00-473D-933D-D16ED72E708C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "..\Application\Application.csproj", "{D958BAEE-12B5-4A1F-95F8-92AD2D8F6418}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{8A53FFF4-0405-4B09-B217-2F87F3676EEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E2A53D89-968C-4988-87AC-C0B53EF02C2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{8C44D2C8-9EF1-4989-AA22-3EB451D57D65}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FBACD92-6A00-473D-933D-D16ED72E708C} = {9FBACD92-6A00-473D-933D-D16ED72E708C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
