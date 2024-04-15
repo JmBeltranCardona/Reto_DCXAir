@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20240414131926_updateDatabase")]
+    [Migration("20240415013008_updateDatabase")]
     partial class updateDatabase
     {
         /// <inheritdoc />
@@ -84,6 +84,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LocationType")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedAt")

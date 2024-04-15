@@ -3,7 +3,6 @@ using Domain.Models.FlightLocations;
 using Domain.Models.Journey;
 using Domain.Models.JourneyFlight;
 using Domain.Models.Transport;
-using Infrastructure.JsonData.Contracts;
 using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Context
 {
