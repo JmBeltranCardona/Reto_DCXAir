@@ -24,11 +24,11 @@ namespace Application.Services.Journey
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJsonData _JsonData;
-        private readonly IDfsRouteSearch _dfsRouteSearch;
+        private readonly IBfsRouteSearch _dfsRouteSearch;
         private readonly IMapper _autoMapper;
         private readonly IConversionCurrencyService _conversionCurrencyService;
 
-        public JourneyService(IUnitOfWork unitOfWork, IJsonData jsonData, IDfsRouteSearch dfsRouteSearch, IMapper mapper, 
+        public JourneyService(IUnitOfWork unitOfWork, IJsonData jsonData, IBfsRouteSearch dfsRouteSearch, IMapper mapper, 
             IConversionCurrencyService conversionCurrencyService)
         {
             _unitOfWork = unitOfWork;

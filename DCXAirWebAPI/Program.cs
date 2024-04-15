@@ -44,7 +44,7 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 //Dependency injection
 builder.Services.AddScoped<IJsonData, JsonData>();
 builder.Services.AddScoped<IJourneyService, JourneyService>();
-builder.Services.AddScoped<IDfsRouteSearch, DfsRouteSearch>();
+builder.Services.AddScoped<IBfsRouteSearch, BfsRouteSearch>();
 builder.Services.AddScoped<IConversionCurrencyService, ConversionCurrencyService>();
 
 

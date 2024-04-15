@@ -3,7 +3,7 @@ using Application.DTOs.Flight;
 
 namespace Application.Services.Algorithm.Search
 {
-    public class DfsRouteSearch : IDfsRouteSearch
+    public class BfsRouteSearch : IBfsRouteSearch
     {
         // Método para encontrar rutas utilizando DFS, incluyendo la opción de ida y vuelta
         public List<FlightDto> FindRoute(Dictionary<string, List<FlightDto>> graph, string origin, string destination)
