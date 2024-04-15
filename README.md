@@ -32,5 +32,7 @@ La base de datos utilizada se encuentra en la capa de Infraestructura - Database
 API de Conversión de Precios:
 Es importante tener en cuenta que el uso de la API de conversión de precios está limitado debido a su naturaleza gratuita. Aunque la API ofrece más de mil intentos, se debe utilizar con prudencia para evitar exceder los límites de uso.
 
+Se recomienda clonar el repositorio de la rama "develop"
+
 Tecnologías utilizadas: C#, .Net 8 - SqlLite y Angular 15
 
