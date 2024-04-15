@@ -1,1 +1,96 @@
-<h1>Hola</h1>
+<div class="container">
+  <div class="card" style="width: auto">
+    <div class="card-body">
+      <h5 class="card-title">Formulario de búsqueda</h5>
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-auto">
+            <legend class="col-form-label pt-0">Origen</legend>
+            <select
+              class="form-select"
+              id="autoSizingSelect"
+              formControlName="origin"
+            >
+              <ng-container *ngFor="let location of flightLocation">
+                <ng-container *ngIf="location.locationType === 'origin'">
+                  <option [value]="location.location"  [disabled]="location.location === searchForm.get('destination')?.value">
+                    {{ location.location }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col-auto">
+            <legend class="col-form-label pt-0">Destino</legend>
+            <select
+              class="form-select"
+              id="autoSizingSelect"
+              formControlName="destination"
+            >
+              <ng-container *ngFor="let location of flightLocation">
+                <ng-container *ngIf="location.locationType === 'destination'">
+                  <option [value]="location.location"  [disabled]="location.location === searchForm.get('origin')?.value">
+                    {{ location.location }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col-auto">
+            <legend class="col-form-label pt-0">Moneda</legend>
+            <label class="visually-hidden" for="autoSizingSelect"
+              >Preference</label
+            >
+            <select
+              class="form-select"
+              id="autoSizingSelect"
+              formControlName="currency"
+            >
+              <option
+                *ngFor="let currency of currencies"
+                [value]="currency.currency"
+              >
+                {{ currency.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <legend class="col-form-label col-sm-2 pt-0">Tipo de ruta</legend>
+          <div class="row">
+            <div class="col-4">
+              <div class="form-check">
+                <input
+                class="form-check-input"
+                type="radio"
+                id="gridRadios1"
+                value="oneWay"
+                checked
+                formControlName="tripType"
+                />
+                <label class="form-check-label" for="gridRadios1">
+                  Solo Ida
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="gridRadios2"
+                  value="roundTrip"
+                  formControlName="tripType"
+                />
+                <label class="form-check-label" for="gridRadios2">
+                  Ida y vuelta
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!searchForm.valid">Buscar rutas</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { Flight } from '../models/flight.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { Flight } from '../models/Flight';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-search-results',
+  selector: 'search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
-export class SearchResultsComponent {
-  
+export class SearchResultsComponent implements OnInit {
+  searchTerm: string = '';
+
+  constructor(private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.searchTerm = this.activatedRoute.snapshot.paramMap.get('searchTerm') || '';
+  }
+
 }

@@ -3,18 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchFormComponent } from './search/search-form/search-form.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
+import { SearchModule } from './search/search.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchFormComponent,
-    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SearchModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
