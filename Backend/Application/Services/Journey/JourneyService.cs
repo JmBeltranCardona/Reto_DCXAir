@@ -15,8 +15,7 @@ using Domain.Models.Flight;
 using Domain.Models.JourneyFlight;
 using Domain.Models.Transport;
 using Microsoft.EntityFrameworkCore;
-using NLog.Fluent;
-using NPOI.SS.Formula.Functions;
+using NLog;
 
 namespace Application.Services.Journey
 {
@@ -27,6 +26,7 @@ namespace Application.Services.Journey
         private readonly IBfsRouteSearch _dfsRouteSearch;
         private readonly IMapper _autoMapper;
         private readonly IConversionCurrencyService _conversionCurrencyService;
+        private readonly NLog.ILogger _logger = LogManager.GetCurrentClassLogger();
 
         public JourneyService(IUnitOfWork unitOfWork, IJsonData jsonData, IBfsRouteSearch dfsRouteSearch, IMapper mapper, 
             IConversionCurrencyService conversionCurrencyService)
@@ -50,13 +50,14 @@ namespace Application.Services.Journey
                 }
 
                 var journeyFlight = _unitOfWork.JourneyRepository.Get()
-                                                                    .Where(j => j.Destination == getRouteQuery.Destination.ToUpper())
-                                                                    .Where(j => j.Origin == getRouteQuery.Origin.ToUpper())
-                                                                    .Where(j => j.RouteType == getRouteQuery.RouteType)
-                                                                        .Include(jf => jf.JourneyFlight)
-                                                                        .ThenInclude(f => f.Flight)
-                                                                        .ThenInclude(t => t.Transport)
-                                                                    .FirstOrDefault();
+                                    .Where(j => j.Destination == getRouteQuery.Destination.ToUpper())
+                                    .Where(j => j.Origin == getRouteQuery.Origin.ToUpper())
+                                    .Where(j => j.RouteType == getRouteQuery.RouteType)
+                                    .Include(jf => jf.JourneyFlight)
+                                    .ThenInclude(f => f.Flight)
+                                    .ThenInclude(t => t.Transport)
+                                    .FirstOrDefault();
+
                 var journeyRoute = new List<JourneyDto>();
                 var journeyResult = new JourneyDto();
 
@@ -66,14 +67,14 @@ namespace Application.Services.Journey
 
                     var graphListJourney = GetGraph(listJourney);
 
-                    journeyResult = await getNewRoute(getRouteQuery.Origin, getRouteQuery.Destination, graphListJourney);
+                    journeyResult = await GetRoute(getRouteQuery.Origin, getRouteQuery.Destination, graphListJourney);
 
                     journeyRoute.Add(journeyResult);
 
                     // Si no es un viaje de ida, agrega la ruta de vuelta
                     if (!getRouteQuery.RouteType)
                     {
-                        journeyResult = await getNewRoute(getRouteQuery.Destination, getRouteQuery.Origin, graphListJourney);
+                        journeyResult = await GetRoute(getRouteQuery.Destination, getRouteQuery.Origin, graphListJourney);
                         journeyRoute.Add(journeyResult);
                     }
 
@@ -110,7 +111,7 @@ namespace Application.Services.Journey
             {
                 response.Result = false;
                 response.Message = $"Error al realizar la consulta, Por favor comunicate con el area administrativa. {ex.Message} ";
-                //Log.Error("GetRoute => {@ex.Message}", ex.Message);
+                _logger.Error("Error al realizar la consulta, Por favor comunicate con el area administrativa ", ex.Message);
                 throw new BadRequestException($"Error al consultar el registro del vuelo. {ex.Message} ");
             }
 
@@ -125,13 +126,12 @@ namespace Application.Services.Journey
             foreach (var route in listRoutes)
             {
                 var convertedFlights = new List<FlightDto>();
-                double totalPrice = 0; // Inicializa el precio total de la ruta
+                double totalPrice = 0;
 
                 foreach (var flight in route.Flights)
                 {
                     var convertedPrice = flight.Price;
 
-                    // Realiza la conversión de moneda si es necesario
                     if (currency != "USD")
                     {
                         var convertedAmount = await ConvertPriceAsync((double)flight.Price, currency);
@@ -141,7 +141,6 @@ namespace Application.Services.Journey
                         }
                     }
 
-                    // Crea un nuevo objeto FlightDto con el precio convertido
                     var convertedFlight = new FlightDto
                     {
                         Origin = flight.Origin,
@@ -150,23 +149,19 @@ namespace Application.Services.Journey
                         Transport = flight.Transport
                     };
 
-                    // Agrega el vuelo convertido a la lista
                     convertedFlights.Add(convertedFlight);
 
-                    // Suma el precio convertido al precio total de la ruta
                     totalPrice += (double)convertedPrice;
                 }
 
-                // Crea un nuevo objeto JourneyDto con los vuelos convertidos y el precio total
                 var transformedRoute = new JourneyDto
                 {
                     Origin = route.Origin,
                     Destination = route.Destination,
-                    Price = totalPrice, // Asigna el precio total calculado
+                    Price = totalPrice,
                     Flights = convertedFlights
                 };
 
-                // Agrega la ruta transformada a la lista
                 transformedRoutes.Add(transformedRoute);
             }
 
@@ -188,7 +183,7 @@ namespace Application.Services.Journey
             return graph;
         }
 
-        public async Task<JourneyDto> getNewRoute(string origin, string destination, Dictionary<string, List<FlightDto>> listRoutes)
+        public async Task<JourneyDto> GetRoute(string origin, string destination, Dictionary<string, List<FlightDto>> listRoutes)
         {
             var result = new List<FlightDto>();
 
@@ -233,7 +228,6 @@ namespace Application.Services.Journey
                     if (!response)
                     {
                         allRoutesSaved = false;
-                        // Puedes agregar un registro de error o manejar la situación de alguna otra manera si la información de vuelo no se almacena correctamente.
                     }
                 }
 
@@ -241,7 +235,7 @@ namespace Application.Services.Journey
             }
             catch (Exception ex)
             {
-                //Log.Error("SaveRoutes => {@ex.Message}", ex.Message);
+                _logger.Error("Ocurrio un error almacenando las rutas en la base de datos, Error al realizar la consulta  ", ex.Message);
                 throw new BadRequestException($"Ocurrio un error almacenando las rutas en la base de datos, Error al realizar la consulta, Por favor comunicate con el area administrativa. {ex.Message} ");
             }
         }
@@ -284,21 +278,19 @@ namespace Application.Services.Journey
             }
             catch (Exception ex)
             {
-                //Log.Error("TouringFlights => {@ex.Message}", ex.Message);
-                throw new BadRequestException($"Ocurrio un error almacenando las rutas en la base de datos, Error al realizar la consulta, Por favor comunicate con el area administrativa. {ex.Message} ");
+                _logger.Error("Ocurrio un error almacenando las rutas en la base de datos", ex.Message);
+                throw new BadRequestException($"Ocurrio un error almacenando las rutas en la base de datos, Por favor comunicate con el area administrativa. {ex.Message} ");
             }
 
         }
 
         private async Task<double?> ConvertPriceAsync(double amount, string targetCurrency)
         {
-            // Llama al servicio de conversión de moneda solo si la moneda objetivo es diferente de USD
-            //Log.Information("LA MONEDA ES DIFERENTE USD");
+
             if (!string.IsNullOrEmpty(targetCurrency) && targetCurrency != "USD")
             {
                 return await _conversionCurrencyService.ConvertCurrency("USD", targetCurrency, amount);
             }
-            // Si la moneda objetivo es USD, no se realiza conversión y se retorna el mismo monto
             return amount;
         }
     }

@@ -5,41 +5,41 @@ namespace Application.Services.Algorithm.Search
 {
     public class BfsRouteSearch : IBfsRouteSearch
     {
-        // Método para encontrar rutas utilizando DFS, incluyendo la opción de ida y vuelta
+        // Method to find routes using BFS, including round trip option
         public List<FlightDto> FindRoute(Dictionary<string, List<FlightDto>> graph, string origin, string destination)
         {
             var queue = new Queue<List<FlightDto>>();
-            // Conjunto de aeropuertos visitados
+            // Set of visited airports
             var visited = new HashSet<string>();
 
-            // Iniciar la búsqueda con una lista de vuelos vacía desde el aeropuerto de origen
+            // Start the search with an empty list of flights from the origin airport
             queue.Enqueue(new List<FlightDto>());
             visited.Add(origin);
 
             while (queue.Count > 0)
             {
-                // Obtener la ruta actual de la cola
+                // Get the current route from the queue
                 var currentRoute = queue.Dequeue();
                 var currentNode = currentRoute.Count > 0 ? currentRoute[^1].Destination : origin;
 
-                // Si hemos llegado al destino
+                // If we have reached the destination
                 if (currentNode == destination)
                 {
                     return currentRoute;
                 }
 
-                // Explorar los vuelos disponibles desde el aeropuerto actual
+                // Explore available flights from the current airport
                 if (graph.ContainsKey(currentNode))
                 {
                     foreach (var flight in graph[currentNode])
                     {
                         if (!visited.Contains(flight.Destination))
                         {
-                            // Marcar el destino como visitado
+                            // Mark the destination as visited
                             visited.Add(flight.Destination);
-                            // Crear una nueva ruta con el vuelo actual
+                            // Create a new route with the current flight
                             var newRoute = new List<FlightDto>(currentRoute) { flight };
-                            // Encolar la nueva ruta
+                            // Enqueue the new route
                             queue.Enqueue(newRoute);
                         }
                     }
