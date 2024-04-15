@@ -6,5 +6,5 @@ export interface Journey {
     destination: string;
     price: string;
     routeType: boolean;
-    flight: Flight[];
+    flights: Flight[];
 }

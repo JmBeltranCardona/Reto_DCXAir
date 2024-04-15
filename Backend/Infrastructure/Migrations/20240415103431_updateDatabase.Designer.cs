@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20240415013008_updateDatabase")]
+    [Migration("20240415103431_updateDatabase")]
     partial class updateDatabase
     {
         /// <inheritdoc />

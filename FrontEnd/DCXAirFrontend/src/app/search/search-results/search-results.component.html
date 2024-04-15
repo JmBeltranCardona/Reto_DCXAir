@@ -1,1 +1,30 @@
-
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h5 class="card-title">Resultados de búsqueda</h5>
+        <div *ngFor="let journey of journeys" class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <!-- Información de la ruta -->
+                <h5 class="card-title">{{ journey.origin }} - {{ journey.destination }}</h5>
+                <!-- Precio de la ruta -->
+                <h5 class="card-title">Precio: {{ journey.price }}</h5>
+              </div>
+              <div class="col-md-7">
+                <!-- Información de los vuelos -->
+                <div *ngFor="let flight of journey.flights">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ flight.origin }} - {{ flight.destination }}</h6>
+                        <p class="card-text">{{ flight.transport[0].flightCarrier }} - {{ flight.transport[0].flightNumber }}</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
