@@ -6,7 +6,8 @@ import { CURRENCIES } from '../Constants/CurrencyConstans';
 import { LOCATIONS } from '../Constants/FlightLocations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonResponse } from '../models/Response';
-import { SearchService } from '../search.service';
+import { SearchService } from '../services/search.service';
+import { DataService } from '../services/Data.service';
 
 @Component({
   selector: 'search-form',
@@ -27,7 +28,9 @@ export class SearchFormComponent {
     ,
   };
 
-  constructor(private _formBuilder: FormBuilder,private _searchService: SearchService) {
+  constructor(private _formBuilder: FormBuilder,private _searchService: SearchService,
+              private _dataService : DataService
+  ) {
     this.createForm();
     this.loadCurrencies();
     this.loadLocations();
@@ -68,7 +71,7 @@ export class SearchFormComponent {
   }
 
   searchResultNext(data: CommonResponse<any>){
-    
+    this._dataService.setResponseData(data);
   }
 
   searchResultError(data: CommonResponse<any>){

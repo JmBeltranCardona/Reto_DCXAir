@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
 import { catchError, map } from 'rxjs';
-import { ResponseHelper } from './helpers/response.helper';
+import { ResponseHelper } from '../helpers/response.helper';
 
 @Injectable({
   providedIn: 'root'

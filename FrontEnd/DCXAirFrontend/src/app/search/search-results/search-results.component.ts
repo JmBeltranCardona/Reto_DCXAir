@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Flight } from '../models/Flight';
-import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/Data.service';
+import { CommonResponse } from '../models/Response';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'search-results',
@@ -8,12 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-  searchTerm: string = '';
+  responseDataSubscription?: Subscription;
+  responseData?: CommonResponse<any>;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this.searchTerm = this.activatedRoute.snapshot.paramMap.get('searchTerm') || '';
+    this.responseDataSubscription = this._dataService.responseData$.subscribe(data => {
+      this.responseData = data;
+      // Aquí puedes realizar las acciones necesarias con la respuesta
+      this.searchResult(this.responseData);
+    });
+  }
+
+  searchResult(responseData: CommonResponse<any>) {
+    console.log(responseData);
   }
 
 }
